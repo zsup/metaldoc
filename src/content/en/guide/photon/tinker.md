@@ -1,20 +1,23 @@
 ---
 word: Tinker
 title: Tinker (Particle app)
-order: 3
+order: 5
+columns: 2
 ---
 
-Tinkering with "Tinker"
-======
+#Tinkering with "Tinker"
 
-The Particle app
----
+##The Particle app
 
 ![Tinker selection]({{assets}}/images/tinker.png)
 
-The Tinker section of the Particle mobile app [for iOS](https://itunes.apple.com/us/app/particle-build-photon-electron/id991459054?ls=1&mt=8) or [for Android](https://play.google.com/store/apps/details?id=io.particle.android.app) makes it very easy to start playing with your Particle device without writing any code. It's great for early development, and often it will do everything you need to get your project off of the ground.
+The Tinker section of the Particle mobile app makes it very easy to start playing with your Particle device without writing any code. It's great for early development, and often it will do everything you need to get your project off of the ground.
 
-The app consists of 16 pins in vertical rows - 8 analog pins on the left, 8 digital pins on the right. These pins represent the 16 GPIO (General Purpose Input and Output) pins on the Photon, and are organized the same way.
+If you don't yet have it, go ahead and grab the Particle App if you have a Photon and Spark Core App if you have a Core.
+- Particle App for Photon: [iPhone](https://itunes.apple.com/us/app/particle-build-photon-electron/id991459054?ls=1&mt=8) | [Android](https://play.google.com/store/apps/details?id=io.particle.android.app)
+- Spark Core App for Core: [iPhone](https://itunes.apple.com/us/app/spark-core/id760157884) | [Android](https://play.google.com/store/apps/details?id=io.spark.core.android)
+
+The app consists of 16 pins in vertical rows - 8 analog pins on the left, 8 digital pins on the right. These pins represent the 16 GPIO (General Purpose Input and Output) pins on your device.
 
 To begin, tap any of the pins. A menu will pop up showing the functions that pin has available, tap a function name to select the pin functionality. You can reset the pin function by long-pressing it. Each pin can have up to four possible functions:
 
@@ -26,10 +29,9 @@ To begin, tap any of the pins. A menu will pop up showing the functions that pin
 In other words, Tinker lets you control and read the voltage of the pins on your device. You can choose to send a lot of voltage to an LED to light it up, or read the voltage at a sensor. Let's do that now!
 
 
-digitalWrite: LED On/Off
----
+##digitalWrite: LED On/Off
 
-The easiest thing we can do is to turn the [D7 LED](/photon/#leds) on and off. The first step is to [connect your device](/photon/connect). Then, open your Particle mobile app and select your device.
+The easiest thing we can do is to turn the D7 LED on and off. The first step is to [connect your device](/photon/connect). Then, open your Particle mobile app and select your device.
 
 To turn on the LED, tap the D7 pin on the mobile app. Then tap `digitalWrite` to let it know that you want to send high or low voltage to that pin.
 
@@ -38,9 +40,7 @@ Once you have done that, try tapping the D7 pin. It will change its status to `H
 `digitalWrite` only has two options: `HIGH` and `LOW`. When we speak to our pins digitally, we can only send the maximum voltage or no voltage. That's great for when you only need two settings-- like if you had a light switch that could only go on and off, or locks that could only be open or closed. For everything in between, we use `analogWrite`.
 
 
-
-analogWrite: LED Dimming
----
+##analogWrite: LED Dimming
 
 In this example, we'll plug an LED into D0 and change its brightness with analogWrite.
 
@@ -59,8 +59,7 @@ By sliding and releasing the slider, you should be able to see the LED dim and g
 If we wanted to, we could also switch modes and `digitalWrite` this LED to turn it on or off. To change the function of the pin, simply tap and hold on the pin, and the function select menu will come back up.
 
 
-digitalRead: The One Wire Test
----
+##digitalRead: The One Wire Test
 
 We can also use Tinker to check to see if a pin is on or off. `digitalRead` is great for checking things that only have two states-- switches and buttons for example.
 
@@ -77,8 +76,7 @@ If your wire is plugged in, you'll see the word `HIGH` next to the D0 pin. Now u
 _NOTE:_  If you don't get `LOW` right away, give it a moment. There's still some residual voltage hanging out in the pin, but in a second or two that will disperse and it should read as `LOW`.
 
 
-analogRead: Reading a Sensor
----
+##analogRead: Reading a Sensor
 
 If we want to read a sensor, like a temperature or light sensor, we will need our device to give us more details than than just "It's on!" or "It's off!" When you want to read a value between `LOW` and `HIGH`, use `analogRead`.
 
@@ -95,8 +93,7 @@ You can try testing different kinds of light, or you can even swap out your phot
 
 
 
-The Tinker firmware
----
+##The Tinker firmware
 
 Pretty cool examples, but what's actually happening here?
 
@@ -117,8 +114,7 @@ The Tinker app is a great example of how to build a very powerful application wi
 
 <a id="annotated-tinker-firmware" data-firmware-example-url="http://docs.particle.io/photon/tinker/#annotated-tinker-firmware" data-firmware-example-title="Tinker" data-firmware-example-description="The factory default firmware that mobile apps interact with">
 
-Using Tinker with Your Code
----
+##Using Tinker with Your Code
 
 I know what you're thinking: this is amazing, but I really want to use Tinker *while* my code is running so I can see what's happening! Now you can.
 
@@ -208,71 +204,4 @@ int tinkerAnalogWrite(String command){
 ```
 
 
-The Tinker API
----
 
-When the Tinker firmware is installed on your Particle device, it will respond to certain API requests from your mobile app, which mirror the four basic GPIO functions (digitalWrite, analogWrite, digitalRead, analogRead). These API requests can also be made from another application or from the command line, so you can build your own web or mobile app around the Tinker firmware.
-
-### digitalWrite
-
-Sets the pin to HIGH or LOW, which either connects it to 3.3V (the maximum voltage of the system) or to GND (ground). Pin D7 is connected to an on-board LED; if you set pin D7 to HIGH, the LED will turn on, and if you set it to LOW, it will turn off.
-
-    POST /v1/devices/{DEVICE_ID}/digitalwrite
-
-    # EXAMPLE REQUEST IN TERMINAL
-    # Device ID is 0123456789abcdef
-    # Your access token is 123412341234
-    curl https://api.particle.io/v1/devices/0123456789abcdef/digitalwrite \
-      -d access_token=123412341234 -d params=D0,HIGH
-
-The parameters must be the pin (A0 to A7, D0 to D7), followed by either HIGH or LOW, separated by a comma. The return value will be 1 if the write succeeds, and -1 if it fails.
-
-
-
-### analogWrite
-
-Sets the pin to a value between 0 and 255, where 0 is the same as LOW and 255 is the same as HIGH. This is sort of like sending a voltage between 0 and 3.3V, but since this is a digital system, it uses a mechanism called Pulse Width Modulation, or PWM. You could use *analogWrite* to dim an LED, as an example.
-
-    POST /v1/devices/{DEVICE_ID}/analogwrite
-
-    # EXAMPLE REQUEST IN TERMINAL
-    # Device ID is 0123456789abcdef
-    # Your access token is 123412341234
-    curl https://api.particle.io/v1/devices/0123456789abcdef/analogwrite \
-      -d access_token=123412341234 -d params=A0,215
-
-The parameters must be the pin (A0 to A7, D0 to D7), followed by an integer value from 0 to 255, separated by a comma. The return value will be 1 if the write succeeds, and -1 if it fails.
-
-
-
-
-### digitalRead
-
-This will read the digital value of a pin, which can be read as either HIGH or LOW. If you were to connect the pin to 3.3V, it would read HIGH; if you connect it to GND, it would read LOW. Anywhere in between, it'll probably read whichever one it's closer to, but it gets dicey in the middle.
-
-    POST /v1/devices/{DEVICE_ID}/digitalread
-
-    # EXAMPLE REQUEST IN TERMINAL
-    # Device ID is 0123456789abcdef
-    # Your access token is 123412341234
-    curl https://api.particle.io/v1/devices/0123456789abcdef/digitalread \
-      -d access_token=123412341234 -d params=D0
-
-
-The parameter must be the pin (A0 to A7, D0 to D7). The return value will be 1 if the pin is HIGH, 0 if the pin is LOW, and -1 if the read fails.
-
-
-
-### analogRead
-
-This will read the analog value of a pin, which is a value from 0 to 4095, where 0 is LOW (GND) and 4095 is HIGH (3.3V). All of the analog pins (A0 to A7) can handle this. *analogRead* is great for reading data from sensors.
-
-    POST /v1/devices/{DEVICE_ID}/analogread
-
-    # EXAMPLE REQUEST IN TERMINAL
-    # Device ID is 0123456789abcdef
-    # Your access token is 123412341234
-    curl https://api.particle.io/v1/devices/0123456789abcdef/analogread \
-      -d access_token=123412341234 -d params=A0
-
-The parameters must be the pin (A0 to A7, D0 to D7). The return value will be between 0 and 4095 if the read succeeds, and -1 if it fails.

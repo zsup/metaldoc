@@ -437,7 +437,7 @@ These are nifty little switches that plug nicely into a breadboard or a proto-bo
 
 ![LDR]({{assets}}/images/mk-ldr.bmp)
 
-A photo resistor is a light dependent resistor whose resistance decreases with the increase in the intensity of light striking it. You can use it to detect the ambient light in the surrounding, detect shadows or use it as a part of a burglar alarm system.
+A photoresistor is a light dependent resistor whose resistance decreases with the increase in the intensity of light striking it. You can use it to detect the ambient light in the surrounding, detect shadows or use it as a part of a burglar alarm system.
 
 [Datasheet >]({{assets}}/datasheets/makerkit/photoresistor.pdf)
 
