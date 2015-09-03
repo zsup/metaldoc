@@ -71,6 +71,15 @@ To erase the stored wifi networks on your device, hold the `SETUP` button for ab
 
 You can also reset the Wi-Fi networks by holding the `SETUP` button and tapping `RESET`, then continuing to hold `SETUP` until the light on the Photon turns white. (This differs from the Core. Doing this action on the Core will result in a factory reset.)
 
+
+### Selecting Modes
+
+To put your Photon into [Safe Mode](#safe-mode) or [DFU mode](#dfu-mode), you'll need to hold the `SETUP` button and tap the `RESET` button. Depending on when you release the `SETUP` button, you'll be selecting a different mode.
+
+![Mode selection](/assets/images/photon-reset-modes-edit.png)
+
+You will notice that Factory Reset is currently missing from this diagram. We have temporarily removed Factory Reset due to space constraints, but you can still [simulate the Core's version of factory reset through other modes if necessary](#factory-reset).
+
 ### Safe Mode
 
 {{{vine "https://vine.co/v/eZUF2ilvLxJ/embed/simple"}}}
@@ -89,13 +98,14 @@ To put your device in Safe Mode:
 
 The device will itself automatically enter safe mode if there is no application code flashed to the device or when the application is not valid.
 
+
 ### DFU Mode (Device Firmware Upgrade)
 
 {{{vine "https://vine.co/v/eZUHnhaUD9Y/embed/simple"}}}
 
 If you wish to program a device with a custom firmware via USB, you'll need to use this mode. This mode triggers the on-board bootloader that accepts firmware binary files via the [dfu-utility.](https://s3.amazonaws.com/spark-assets/dfu-util-0.8-binaries.tar.xz)
 
-Installation tutorial can be found [here.](/photon/cli/#upgrading-from-the-spark-cli-advanced-install)
+Installation tutorial can be found [here.](/guide/tools-and-features/cli/#upgrading-from-the-spark-cli)
 
 To enter DFU Mode:
 
@@ -108,15 +118,20 @@ To enter DFU Mode:
 
 The device now is in the DFU mode.
 
-### Firmware Reset
-
-Firmware reset is not available on the Photon/P1, but not to worry! If you are experiencing problems with your application firmware, you can use [Safe Mode](#safe-mode) to recover.
-
 ### Factory Reset
 
-Factory reset is not available on the Photon/P1, but not to worry! If you are experiencing problems with your application firmware, you can use [Safe Mode](#safe-mode) to recover.
+Factory reset and firmware reset are not available on the Photon/P1, but not to worry! If you are experiencing problems with your application firmware, you can use [Safe Mode](#safe-mode) to recover.
 
-You can reset Wi-Fi credentials by performing a [WiFi Network Reset](#wifi-network-reset).
+If you want to get an experience similar to Factory Reset, you can:
+
+1.  [Reset the Wi-Fi networks](#wi-fi-network-reset)
+2.  Put the Photon in [Safe Mode](#safe-mode)
+3.  Flash Tinker to your Photon, either through:
+
+    -  going to the [CLI](/guide/tools-and-features/cli) and typing `particle flash tinker`
+    -  going to the [Particle Mobile App](/guide/getting-started/tinker), selecting your device, and reflashing Tinker
+    -  signing in on [Particle Build](http://build.particle.io), selecting the Tinker example in the code menu, forking the example, and flashing it to your device
+
 
 ## Troubleshooting Modes
 
@@ -242,18 +257,18 @@ A pattern of more than 10 red flashes is caused by the firmware crashing. The pa
 
 There are a number of other red flash codes that may be expressed after the SOS blinks:
 
-#1 Hard fault
-#2 Non-maskable interrupt fault
-#3 Memory Manager fault
-#4 Bus fault
-#5 Usage fault
-#6 Invalid length
-#7 Exit
-#8 Out of heap memory
-#9 SPI over-run
-#10 Assertion failure
-#11 Invalid case
-#12 Pure virtual call
+1. Hard fault
+2. Non-maskable interrupt fault
+3. Memory Manager fault
+4. Bus fault
+5. Usage fault
+6. Invalid length
+7. Exit
+8. Out of heap memory
+9. SPI over-run
+10. Assertion failure
+11. Invalid case
+12. Pure virtual call
 
 
 Don't forget that the [community forum is always there to help](https://community.particle.io).
