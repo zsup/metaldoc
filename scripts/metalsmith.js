@@ -103,6 +103,7 @@ exports.metalsmith = function() {
         orderDynamicCollections: [
           'getting-started',
           'tools-and-features',
+          'fundamentals',
           'how-to-build-a-product'
         ]
       },
