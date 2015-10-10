@@ -1,10 +1,10 @@
 {
-  "name": "particle-docs",
-  "version": "0.3.0",
+  "name": "metaldoc",
+  "version": "0.1.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git://github.com/spark/docs.git"
+    "url": "git://github.com/zsup/metaldoc.git"
   },
   "scripts": {
     "start": "node ./scripts/server.js",
@@ -12,7 +12,6 @@
     "build": "node ./scripts/build.js"
   },
   "dependencies": {
-    "apidoc": "^0.13.1",
     "cheerio": "^0.16.0",
     "handlebars": "^3.0.1",
     "jade": "^1.11.0",

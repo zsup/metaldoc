@@ -1,17 +1,13 @@
-## Particle Documentation [![Build Status](https://travis-ci.org/spark/docs.svg?branch=master)](https://travis-ci.org/spark/docs)
+## Metaldoc [![Build Status](https://travis-ci.org/zsup/metaldoc.svg?branch=master)](https://travis-ci.org/zsup/metaldoc)
 =======
 
-Here you'll find the documentation for the Particle platform, including the Particle Cloud, Photon, and Spark Core.
+Metaldoc is a documentation static site generator, built with Node.js and Metalsmith.
 
-To view this documentation, visit [our website](http://docs.particle.io), where the documentation is hosted.
-
-**Note**: This is a new public repository as of May 18, 2015. All
-outstanding pull requests from the old docs repository have been closed.
-Please re-open them in this repo.
+Metaldoc was originally built for [Particle documentation](http://docs.particle.io), which is the best example of Metaldoc in use.
 
 ### Installation
 
-To host this documentation locally, you'll need Node.js and npm:
+To host Metaldoc locally, you'll need Node.js and npm:
 
     brew install nodejs
 
@@ -23,9 +19,9 @@ to install any other necessary dependencies.
 
 ### Hosting locally
 
-This documentation uses a fabulous tool from the folks at Segment called [Metalsmith](http://www.metalsmith.io). Metalsmith is a static site generator that builds static HTML sites from source material in other formats; in this case, Markdown and Handlebars.
+Metaldoc uses a fabulous tool from the folks at Segment called [Metalsmith](http://www.metalsmith.io). Metalsmith is a static site generator that builds static HTML sites from source material in other formats; in this case, Markdown and Handlebars.
 
-To run a locally hosted version of the documentation, follow the installation instructions above, and then within the 'docs' directory type in your terminal:
+To run a locally hosted version of the documentation, follow the installation instructions above, and then within the 'metaldoc' directory type in your terminal:
 
 `npm start`
 
@@ -37,40 +33,17 @@ To run the tests locally, run `npm test` from the root of the
 repository. This will tell you whether the build will pass on Travis or
 not.
 
-### Deployment
+### Configuration
 
-When updated documentation is pushed to the master branch, it is automatically pushed to Amazon S3 by Travis CI.
-
-TODO: FURTHER INSTRUCTIONS FOR DEPLOYMENT
-
-To see the latest build, visit the [Travis CI page](https://travis-ci.org/spark/docs).
+Configuration still to be documented, as the current state of this project is that it's still pretty much just set up for Particle Docs.
 
 ### Organization
 
-The majority of the content herein is stored in the `src/content/en` directory as a set of Markdown files. Assets such as images and javascript are stored in the `src/assets` directory.
-
-Within the `en` subdirectory, there are three subfolders: `core`,
-`photon`, and `shared`. Files in `core` will only be shown in the menu when the user
-is viewing Core-specific docs, and `photon` files will be visible when
-viewing Photon-specific docs. Files in `shared` will be nested under both
-devices, so put pages here that apply to both the Core and the Photon.
-
-If you create a new file under the `shared`, please add `shared: true`
-to the front-matter at the beginning of the MD file so that the link to
-edit the file on GitHub will be correct. For instance:
-
-```
----
-word: API
-title: Cloud code (API)
-order: 4
-shared: true
----
-```
+The majority of your content should be stored in the `src/content` directory as a set of Markdown files. Assets such as images and javascript are stored in the `src/assets` directory.
 
 ### Structuring your content
 
-The docs dynamically generate a table of contents for navigation purposes based on the headers (i.e. `###`) that you use on each page. It is important to note that _order and heirarchy matters_ when you are designing the organization of content on your page. Your page should include the following:
+Metaldoc will dynamically generate a table of contents for navigation purposes based on the headers (i.e. `###`) that you use on each page. It is important to note that _order and heirarchy matters_ when you are designing the organization of content on your page. Your page should include the following:
 
 * 1 `h1` at the top of the page that will serve as the title of the page. You can even copy the `title` directly from the front-matter of the markdown file like this: `# {{title}}`
 
@@ -80,53 +53,18 @@ The docs dynamically generate a table of contents for navigation purposes based 
 
 Note that there are only 2 levels of navigation that will appear in the table of contents. *`h4`s and below will not appear in the table of contents*.
 
-### Device Specific Content
-
-If you are working on a page that has device-specific content, the
-first thing you need to do is add the relevant device names to the
-front-matter of the MD file, like this:
-
-```
-devices: ['photon', 'core']
-```
-Where Photon and Core are the relevant devices to this page. Then, in
-the body of the page, you can specify device-specific content by
-using a special helper, like this:
-
-```
-{{#if photon}}
-  PHOTON SPECIFIC STUFFZ
-{{/if}}
-
-{{#if core}}
-  CORE SPECIFIC STUFFZ
-{{/if}}
-```
-
-### Tests
-
-To run the test scripts, run `npm test`.
-
 ### Attributions
-
-Some of this documentation is derived from the [Arduino documentation](http://arduino.cc/en/Reference), as the Arduino/Wiring language and libraries are used extensively on the Spark Core.
 
 This documentation was originally built using [Flatdoc](http://ricostacruz.com/flatdoc/), an awesome tool for building beautiful documentation from simple Markdown files. We have made many modifications since, but the inspiration remains.
 
 ### Contributions
 
-This documentation is managed by Particle, but supported by the community. We welcome contributions such as:
+aking a contribution is as simple as forking this repository, making edits to your fork, and contributing those edits as a pull request. For more information on how to make a pull request, see [Github's documentation](https://help.github.com/articles/using-pull-requests/).
 
-* Edits to improve grammar or fix typos
-* Edits to improve clarity
-* Additional annotated examples for others to follow
-* Additional content that would help provide a complete understanding of the Particle platform
-* Translations to other languages
-
-Making a contribution is as simple as forking this repository, making edits to your fork, and contributing those edits as a pull request. For more information on how to make a pull request, see [Github's documentation](https://help.github.com/articles/using-pull-requests/).
+If you add new features, please add documentation and tests for those features, following the example of existing documentation and tests.
 
 ### License
 
 These files have been made available online through a [Creative Commons Attribution-ShareAlike 3.0 license](http://creativecommons.org/licenses/by-sa/3.0/us/).
 
-You are welcome to distribute, remix, and use these files for commercial purposes. If you do so, please attribute the original design to Spark Labs, Inc. both on the website and on the physical packaging of the product or in the instruction manual. All derivative works must be published under the same or a similar license.
+You are welcome to distribute, remix, and use these files for commercial purposes. If you do so, please attribute the original design to Particle Industries, Inc. both on the website and on the physical packaging of the product or in the instruction manual. All derivative works must be published under the same or a similar license.
